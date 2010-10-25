@@ -132,13 +132,17 @@ end
 function _M.elem(tag,items)
     local s = _M.new(tag)
     if type(items) == 'string' then items = {items} end
-    for k,v in pairs(items) do
-        if type(k) == 'string' then
-            s.attr[k] = v
-            t_insert(s.attr,k)
-        else
-            s[k] = v
-        end
+    if _M.is_tag(items) then
+       t_insert(s,items)
+    elseif type(items) == 'table' then
+       for k,v in pairs(items) do
+           if type(k) == 'string' then
+               s.attr[k] = v
+               t_insert(s.attr,k)
+           else
+               s[k] = v
+           end
+       end
     end
     return s
 end
