@@ -556,7 +556,7 @@ end
 local match
 function match(d,pat,res,keep_going)
     local ret = true
-    if d == nil then return false end
+    if d == nil then d = '' end
     -- attribute string matching is straight equality, except if the pattern is a $ capture,
     -- which always succeeds.
     if type(d) == 'string' then
