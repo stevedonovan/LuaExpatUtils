@@ -51,6 +51,15 @@ function _M.new(tag, attr)
     return setmetatable(doc, Doc);
 end
 
+-- injects an existing document already parsed
+-- @param tdoc table containing the parsed document
+function _M.build(tdoc)
+    _M.walk(tdoc,false,function(_,d)
+        setmetatable(d,Doc)
+    end)
+    return tdoc
+end
+
 --- parse an XML document.  By default, this uses lxp.lom.parse, but
 -- falls back to basic_parse, or if use_basic is true
 -- @param text_or_file  file or string representation
